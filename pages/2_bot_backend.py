@@ -16,6 +16,8 @@ TOKEN = st.secrets["TOKEN"]
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
+st.write('Back-end is ready to use - bot is running')
+
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     user_name = message.from_user.full_name
