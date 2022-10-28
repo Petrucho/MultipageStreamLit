@@ -88,14 +88,14 @@ def vectorize(clean_tokenized_comments):
     # tfid = TfidfVectorizer(ngram_range=(1, 1))
 
     # load the model from disk
-    filename = './tfid_model.pkl'
+    filename = '/home/petrucho/MultipageStreamLit/pages/tfid_model.pkl'
     loaded_tfid_model = pickle.load(open(filename, 'rb'))
     answer = loaded_tfid_model.transform(clean_tokenized_comments)
     return answer
 
 def negative_or_positive(tfid_representation):
     # load the model from disk
-    filename = './LogReg_model.pkl'
+    filename = '/home/petrucho/MultipageStreamLit/pages/LogReg_model.pkl'
     loaded_Log_Reg_model = pickle.load(open(filename, 'rb'))
     answer = loaded_Log_Reg_model.predict(tfid_representation)
     # print(answer)
