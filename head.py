@@ -1,4 +1,5 @@
 import streamlit as st
+import asyncio
 
 st.set_page_config(
     page_title="Hello",
@@ -26,3 +27,17 @@ st.markdown(
     - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
 """
 )
+
+# this part of code needed in Streamlit - whatever it's mean
+def get_or_create_eventloop():
+    try:
+        return asyncio.get_event_loop()
+    except RuntimeError as ex:
+        if "There is no current event loop in thread" in str(ex):
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            return asyncio.get_event_loop()
+
+if "loop" not in st.session_state:
+    st.session_state.loop = asyncio.new_event_loop()
+asyncio.set_event_loop(st.session_state.loop)
